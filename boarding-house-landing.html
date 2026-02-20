@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>N & S Apartment and Boarding House – Find Your Ideal Room Today</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-deep: #2d6a4f;
+    --green-mid: #40916c;
+    --green-light: #74c69d;
+    --green-pale: #d8f3dc;
+    --green-mist: #f0faf4;
+    --white: #ffffff;
+    --gray-soft: #f4f6f5;
+    --gray-mid: #8a9e94;
+    --gray-dark: #2c3d35;
+    --shadow-card: 0 4px 24px rgba(45, 106, 79, 0.10);
+    --shadow-hover: 0 12px 40px rgba(45, 106, 79, 0.18);
+    --radius: 20px;
+    --radius-sm: 12px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--gray-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 6vw;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(116,198,157,0.15);
+    transition: box-shadow .3s;
+  }
+  nav.scrolled { box-shadow: 0 2px 20px rgba(45,106,79,.10); }
+
+  .nav-logo {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem; font-weight: 700;
+    color: var(--green-deep);
+    letter-spacing: -0.5px;
+  }
+  .nav-logo span { color: var(--green-light); }
+
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    font-size: .9rem; font-weight: 500; color: var(--gray-dark);
+    text-decoration: none; transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--green-mid); }
+
+  .nav-cta {
+    background: var(--green-deep); color: #fff;
+    padding: 10px 22px; border-radius: 50px;
+    font-size: .875rem; font-weight: 600;
+    text-decoration: none; transition: background .2s, transform .2s;
+  }
+  .nav-cta:hover { background: var(--green-mid); transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center; gap: 0;
+    padding: 120px 6vw 80px;
+    background: var(--green-mist);
+    position: relative; overflow: hidden;
+  }
+  #hero::before {
+    content: '';
+    position: absolute; top: -100px; right: -100px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(116,198,157,0.25) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+  }
+  #hero::after {
+    content: '';
+    position: absolute; bottom: -80px; left: -60px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(64,145,108,0.12) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+  }
+
+  .hero-text { position: relative; z-index: 1; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--green-pale); color: var(--green-deep);
+    padding: 6px 16px; border-radius: 50px;
+    font-size: .8rem; font-weight: 600; letter-spacing: .5px;
+    margin-bottom: 24px;
+    animation: fadeUp .6s ease both;
+  }
+  .hero-badge::before { content: '🌿'; }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 700; line-height: 1.1;
+    color: var(--gray-dark); letter-spacing: -1px;
+    animation: fadeUp .6s .1s ease both;
+  }
+  h1 em { color: var(--green-mid); font-style: italic; }
+
+  .hero-sub {
+    margin-top: 20px;
+    font-size: 1.1rem; color: var(--gray-mid); line-height: 1.7;
+    max-width: 440px;
+    animation: fadeUp .6s .2s ease both;
+  }
+
+  .hero-actions {
+    margin-top: 36px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap;
+    animation: fadeUp .6s .3s ease both;
+  }
+
+  .btn-primary {
+    background: var(--green-deep); color: #fff;
+    padding: 15px 32px; border-radius: 50px;
+    font-size: 1rem; font-weight: 600; text-decoration: none;
+    box-shadow: 0 6px 24px rgba(45,106,79,0.25);
+    transition: all .25s; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--green-mid); transform: translateY(-2px); box-shadow: 0 10px 32px rgba(45,106,79,0.32); }
+
+  .btn-ghost {
+    color: var(--green-deep); font-size: 1rem; font-weight: 500;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    transition: gap .2s;
+  }
+  .btn-ghost:hover { gap: 14px; }
+  .btn-ghost::after { content: '→'; }
+
+  .hero-stats {
+    margin-top: 48px; display: flex; gap: 32px;
+    animation: fadeUp .6s .4s ease both;
+  }
+  .stat-item { text-align: center; }
+  .stat-num { font-family: 'Fraunces', serif; font-size: 1.8rem; font-weight: 700; color: var(--green-deep); }
+  .stat-label { font-size: .78rem; color: var(--gray-mid); font-weight: 500; margin-top: 2px; }
+
+  .hero-visual {
+    position: relative; z-index: 1;
+    animation: fadeUp .7s .1s ease both;
+  }
+  .hero-img-wrap {
+    position: relative;
+    border-radius: 28px; overflow: hidden;
+    box-shadow: 0 32px 80px rgba(45,106,79,0.20);
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, #d8f3dc 0%, #b7e4c7 50%, #74c69d 100%);
+  }
+  .hero-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* placeholder image using CSS */
+  .hero-img-placeholder {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #b7e4c7 0%, #52b788 60%, #2d6a4f 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 6rem;
+  }
+
+  .hero-float-card {
+    position: absolute; bottom: -20px; left: -30px;
+    background: #fff; border-radius: var(--radius-sm);
+    padding: 14px 20px;
+    box-shadow: var(--shadow-card);
+    display: flex; align-items: center; gap: 12px;
+  }
+  .float-icon { font-size: 1.6rem; }
+  .float-label { font-size: .78rem; color: var(--gray-mid); font-weight: 500; }
+  .float-val { font-size: 1rem; font-weight: 700; color: var(--green-deep); }
+
+  .hero-float-card2 {
+    position: absolute; top: -16px; right: -20px;
+    background: var(--green-deep); border-radius: var(--radius-sm);
+    padding: 12px 18px; color: #fff;
+    box-shadow: 0 8px 24px rgba(45,106,79,0.30);
+  }
+  .float-card2-label { font-size: .7rem; font-weight: 500; opacity: .7; }
+  .float-card2-val { font-size: 1.1rem; font-weight: 700; margin-top: 2px; }
+
+  /* ── SECTIONS SHARED ── */
+  section { padding: 90px 6vw; }
+  .section-label {
+    display: inline-block;
+    background: var(--green-pale); color: var(--green-deep);
+    padding: 5px 14px; border-radius: 50px;
+    font-size: .78rem; font-weight: 600; letter-spacing: .8px; text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 700; letter-spacing: -0.5px; line-height: 1.15;
+    color: var(--gray-dark);
+  }
+  .section-sub { color: var(--gray-mid); font-size: 1.05rem; line-height: 1.7; margin-top: 10px; max-width: 520px; }
+
+  /* ── ROOMS ── */
+  #rooms { background: var(--white); }
+  .rooms-header { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; margin-bottom: 48px; flex-wrap: wrap; }
+  .rooms-link { color: var(--green-mid); font-size: .9rem; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 6px; }
+  .rooms-link:hover { color: var(--green-deep); }
+  .rooms-link::after { content: '→'; transition: transform .2s; }
+  .rooms-link:hover::after { transform: translateX(4px); }
+
+  .rooms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 28px;
+  }
+
+  .room-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    border: 1px solid rgba(116,198,157,0.12);
+    transition: transform .3s, box-shadow .3s;
+    cursor: pointer;
+  }
+  .room-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+
+  .room-img {
+    aspect-ratio: 4 / 3; /* Taller and more standard */
+    overflow: hidden;
+    position: relative;
+    border-bottom: 1px solid var(--green-pale); /* Optional: adds a nice separator */
+}
+
+.room-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This ensures the photo fills the space without stretching */
+}
+  .room-img-bg {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem;
+    transition: transform .4s;
+  }
+  .room-card:hover .room-img-bg { transform: scale(1.05); }
+
+  .room-img-bg.r1 { background: linear-gradient(135deg, #d8f3dc, #95d5b2); }
+  .room-img-bg.r2 { background: linear-gradient(135deg, #b7e4c7, #52b788); }
+  .room-img-bg.r3 { background: linear-gradient(135deg, #95d5b2, #40916c); }
+
+  .room-badge {
+    position: absolute; top: 14px; left: 14px;
+    background: rgba(255,255,255,0.95); color: var(--green-deep);
+    padding: 5px 12px; border-radius: 50px;
+    font-size: .75rem; font-weight: 700;
+  }
+  .room-badge.available { background: var(--green-deep); color: #fff; }
+
+  .room-info { padding: 22px 24px 26px; }
+  .room-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem; font-weight: 600; color: var(--gray-dark); margin-bottom: 8px;
+  }
+  .room-price {
+    font-size: 1.5rem; font-weight: 700; color: var(--green-deep);
+    margin-bottom: 14px;
+  }
+  .room-price span { font-size: .85rem; font-weight: 400; color: var(--gray-mid); }
+
+  .room-amenities {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;
+  }
+  .amenity-tag {
+    background: var(--gray-soft); color: var(--gray-dark);
+    padding: 4px 12px; border-radius: 50px;
+    font-size: .78rem; font-weight: 500;
+  }
+
+  .room-cta {
+    display: block; width: 100%;
+    background: var(--green-mist); color: var(--green-deep);
+    border: 1.5px solid var(--green-pale);
+    padding: 11px; border-radius: 12px;
+    font-size: .9rem; font-weight: 600;
+    text-align: center; cursor: pointer;
+    transition: background .2s, border-color .2s;
+  }
+  .room-cta:hover { background: var(--green-pale); border-color: var(--green-light); }
+
+  /* ── ABOUT ── */
+  #about { background: var(--gray-soft); }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;
+    margin-top: 48px;
+  }
+  .about-desc {
+    font-size: 1.05rem; line-height: 1.8; color: #4a6358; margin-bottom: 28px;
+  }
+  .owner-card {
+    background: var(--white); border-radius: var(--radius);
+    padding: 24px 28px; box-shadow: var(--shadow-card);
+    display: flex; align-items: center; gap: 20px;
+  }
+  .owner-avatar {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--green-light), var(--green-mid));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem; flex-shrink: 0;
+  }
+  .owner-name { font-weight: 700; font-size: 1.05rem; color: var(--gray-dark); }
+  .owner-role { font-size: .8rem; color: var(--gray-mid); margin-bottom: 8px; }
+  .owner-contact { display: flex; flex-direction: column; gap: 4px; }
+  .owner-contact a {
+    font-size: .85rem; color: var(--green-mid); text-decoration: none; font-weight: 500;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .owner-contact a:hover { color: var(--green-deep); }
+
+  .map-wrapper {
+    border-radius: var(--radius); overflow: hidden;
+    box-shadow: var(--shadow-card); aspect-ratio: 4/3;
+    position: relative; background: var(--green-pale);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .map-placeholder {
+    text-align: center; color: var(--green-deep);
+    font-size: 3rem; flex-direction: column; display: flex; align-items: center; gap: 12px;
+  }
+  .map-placeholder p { font-size: .9rem; color: var(--green-mid); font-weight: 500; font-family: 'DM Sans', sans-serif; }
+  .map-wrapper iframe { width: 100%; height: 100%; border: 0; }
+
+  /* ── TESTIMONIALS ── */
+  #testimonials { background: var(--white); }
+  .testi-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px; margin-top: 48px;
+  }
+  .testi-card {
+    background: var(--green-mist);
+    border-radius: var(--radius);
+    padding: 30px 28px;
+    border: 1px solid rgba(116,198,157,0.20);
+    transition: transform .3s, box-shadow .3s;
+    position: relative;
+  }
+  .testi-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+  .testi-quote {
+    font-size: 2.5rem; color: var(--green-light);
+    font-family: 'Fraunces', serif; line-height: 1;
+    margin-bottom: 14px;
+  }
+  .testi-text {
+    font-size: .97rem; line-height: 1.7; color: #4a6358;
+    margin-bottom: 22px; font-style: italic;
+  }
+  .testi-author { display: flex; align-items: center; gap: 14px; }
+  .testi-avatar {
+    width: 46px; height: 46px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; flex-shrink: 0;
+  }
+  .av1 { background: linear-gradient(135deg, #d8f3dc, #95d5b2); }
+  .av2 { background: linear-gradient(135deg, #b7e4c7, #52b788); }
+  .av3 { background: linear-gradient(135deg, #74c69d, #40916c); }
+  .testi-name { font-weight: 700; font-size: .92rem; color: var(--gray-dark); }
+  .testi-course { font-size: .78rem; color: var(--gray-mid); }
+  .stars { color: #f4a261; font-size: .85rem; margin-bottom: 2px; }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--green-deep); position: relative; overflow: hidden; }
+  #contact::before {
+    content: '';
+    position: absolute; top: -100px; right: -80px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(116,198,157,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    position: relative; z-index: 1;
+  }
+  .contact-text h2 { color: #fff; }
+  .contact-text .section-label { background: rgba(255,255,255,0.12); color: var(--green-pale); }
+  .contact-text p { color: rgba(255,255,255,0.7); font-size: 1.05rem; line-height: 1.7; margin-top: 14px; }
+
+  .contact-perks { margin-top: 32px; display: flex; flex-direction: column; gap: 14px; }
+  .perk { display: flex; align-items: center; gap: 12px; color: rgba(255,255,255,0.85); font-size: .95rem; }
+  .perk-icon {
+    width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0;
+  }
+
+  .contact-form {
+    background: var(--white); border-radius: var(--radius);
+    padding: 36px 32px; box-shadow: 0 20px 60px rgba(0,0,0,0.20);
+  }
+  .form-title { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 700; color: var(--gray-dark); margin-bottom: 24px; }
+  .form-group { margin-bottom: 18px; }
+  .form-group label {
+    display: block; font-size: .83rem; font-weight: 600; color: var(--gray-mid);
+    margin-bottom: 6px; text-transform: uppercase; letter-spacing: .5px;
+  }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    padding: 13px 16px;
+    border: 1.5px solid #e8f0ec;
+    border-radius: var(--radius-sm);
+    font-family: 'DM Sans', sans-serif;
+    font-size: .95rem; color: var(--gray-dark);
+    background: var(--gray-soft);
+    transition: border-color .2s, background .2s;
+    outline: none;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: var(--green-light);
+    background: var(--white);
+    box-shadow: 0 0 0 3px rgba(116,198,157,0.15);
+  }
+  .form-group textarea { resize: vertical; min-height: 110px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  .form-submit {
+    width: 100%; padding: 15px;
+    background: var(--green-deep); color: #fff;
+    border: none; border-radius: 12px;
+    font-size: 1rem; font-weight: 700;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer; transition: background .2s, transform .2s;
+    margin-top: 6px;
+  }
+  .form-submit:hover { background: var(--green-mid); transform: translateY(-1px); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--gray-dark); color: rgba(255,255,255,0.6);
+    padding: 40px 6vw;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 20px;
+  }
+  .footer-logo {
+    font-family: 'Fraunces', serif; font-size: 1.3rem;
+    font-weight: 700; color: #fff;
+  }
+  .footer-logo span { color: var(--green-light); }
+  .footer-links { display: flex; gap: 28px; }
+  .footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: .85rem; transition: color .2s; }
+  .footer-links a:hover { color: var(--green-light); }
+  .footer-copy { font-size: .8rem; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── HAMBURGER ── */
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { width: 24px; height: 2px; background: var(--gray-dark); border-radius: 2px; transition: all .3s; }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; flex-direction: column; gap: 0; position: absolute; top: 100%; left: 0; right: 0; background: #fff; padding: 16px 6vw 24px; box-shadow: 0 12px 30px rgba(0,0,0,.1); }
+    .nav-links.open { display: flex; }
+    .nav-links li { padding: 12px 0; border-bottom: 1px solid var(--gray-soft); }
+    .hamburger { display: flex; }
+    .nav-cta { display: none; }
+
+    #hero { grid-template-columns: 1fr; padding: 100px 6vw 60px; }
+    .hero-visual { order: -1; }
+    .hero-float-card, .hero-float-card2 { display: none; }
+    .hero-stats { gap: 20px; }
+
+    .about-grid { grid-template-columns: 1fr; gap: 32px; }
+    .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; text-align: center; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+    .rooms-header { flex-direction: column; align-items: flex-start; }
+  }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">H & S Apartment <span>and </span> Boarding House</div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#rooms">Rooms</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Inquire Now</a>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-text">
+    <div class="hero-badge">Student-Friendly Boarding House</div>
+    <h1>Find Your <em>Ideal Room</em> Today</h1>
+    <p class="hero-sub">Comfortable, affordable, and secure rooms just minutes from campus. Feel at home while you focus on what matters most — your studies.</p>
+    <div class="hero-actions">
+      <a href="#rooms" class="btn-primary">View Rooms</a>
+      <a href="#about" class="btn-ghost">Learn More</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">12+</div>
+        <div class="stat-label">Rooms Available</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">98%</div>
+        <div class="stat-label">Happy Tenants</div>
+      </div>
+      
+      <div class="stat-item">
+        <div class="stat-num">5★</div>
+        <div class="stat-label">Average Rating</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-img-wrap">
+      <div class="hero-img-placeholder">
+        <img src="./images/full pic.jpg" alt="Description of the image">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROOMS -->
+<section id="rooms">
+  <div class="rooms-header reveal">
+    <div>
+      <div class="section-label">Available Rooms</div>
+      <h2>Choose Your Perfect Space</h2>
+      <p class="section-sub">All rooms include free Wi-Fi, 24/7 security, and access to shared common areas.</p>
+    </div>
+    <a href="#contact" class="rooms-link">See all rooms</a>
+  </div>
+
+  <div class="rooms-grid">
+    <!-- Card 1 -->
+    <div class="room-card reveal">
+      <div class="room-img">
+        <div class="room-img-bg r1">
+          <img src="./images/triple double deck.jpg" alt="Description of the image">
+        </div>
+        <span class="room-badge available">✓ Available</span>
+      </div>
+      <div class="room-info">
+        <div class="room-title">3 Double Deck Room</div>
+        <div class="room-price">₱3,500 <span>/ month</span></div>
+        <div class="room-amenities">
+          <span class="amenity-tag">Single Bed</span>
+          <span class="amenity-tag">Wi-Fi</span>
+          <span class="amenity-tag">Window View</span>
+          <span class="amenity-tag">Private Lock</span>
+        </div>
+        <button class="room-cta">Book This Room</button>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="room-card reveal">
+      <div class="room-img">
+        <div class="room-img-bg r2">
+           <img src="./images/triple double deck 2.jpg" alt="Description of the image">
+        </div>
+        <span class="room-badge available">✓ Available</span>
+      </div>
+      <div class="room-info">
+        <div class="room-title">Deluxe Double Room</div>
+        <div class="room-price">₱5,200 <span>/ month</span></div>
+        <div class="room-amenities">
+          <span class="amenity-tag">Double Bed</span>
+          <span class="amenity-tag">Wi-Fi</span>
+          <span class="amenity-tag">Aircon</span>
+          <span class="amenity-tag">Cabinet</span>
+        </div>
+        <button class="room-cta">Book This Room</button>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="room-card reveal">
+      <div class="room-img">
+        <div class="room-img-bg r3">
+           <img src="./images/tw double deck.jpg" alt="Description of the image">
+        </div>
+        <span class="room-badge" style="background:#e9c46a;color:#333;">Almost Full</span>
+      </div>
+      <div class="room-info">
+        <div class="room-title">Premium Suite</div>
+        <div class="room-price">₱7,500 <span>/ month</span></div>
+        <div class="room-amenities">
+          <span class="amenity-tag">Queen Bed</span>
+          <span class="amenity-tag">Wi-Fi</span>
+          <span class="amenity-tag">Aircon</span>
+          <span class="amenity-tag">Own CR</span>
+          <span class="amenity-tag">Study Desk</span>
+        </div>
+        <button class="room-cta">Book This Room</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="reveal">
+    <div class="section-label">About the Property</div>
+    <h2>A Place You'll Be Proud to Call Home</h2>
+  </div>
+  <div class="about-grid">
+    <div class="reveal">
+      <p class="about-desc">N & S Apartment and Boarding House offers a peaceful, clean, and secure environment specifically designed for the student lifestyle. Located in the heart of the MSU campus, we provide the perfect balance of convenience and comfort.</p>
+      <p class="about-desc">Our facility is situated at MSU Cadayonan, Marawi City, positioned just below the College of Law, College of Education, and College of Engineering. We are conveniently located right beside the MSU-Meranaw Cultural Heritage Center.</p>
+      <div class="owner-card">
+        <div class="owner-avatar">👩</div>
+        <div>
+          <div class="owner-name">Maria Santos</div>
+          <div class="owner-role">Property Owner & Manager</div>
+          <div class="owner-contact">
+            <a href="tel:+63953-097-1127">+63 953 097 1127</a>
+            <a href="/cdn-cgi/l/email-protection#bed3dfccd7dfcddfd0cad1cdfed9ccdbdbd0d0dbcdca90ced6">✉️ <span class="__cf_email__" data-cfemail="7a171b08131b091b140e15093a1d081f1f14141f090e540a12">[email&#160;protected]</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="map-wrapper reveal">
+      <!-- Replace src with actual Google Maps embed URL -->
+      <div class="map-placeholder">
+        <span>🗺️</span>
+        <p>123 Acacia Street, Diliman<br>Quezon City, Metro Manila</p>
+        <p style="font-size:.8rem; margin-top:8px; opacity:.7;">Google Maps Embed Goes Here</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="reveal" style="text-align:center; margin-bottom: 48px;">
+    <div class="section-label">Testimonials</div>
+    <h2>What Our Tenants Say</h2>
+    <p class="section-sub" style="margin: 10px auto 0; text-align:center;">Real experiences from real students who called N & S Apartment and Boarding House a home.</p>
+  </div>
+
+  <div class="testi-grid">
+    <div class="testi-card reveal">
+      <div class="testi-quote">"</div>
+      <p class="testi-text">Living at N & S Apartment and Boarding House made my college life so much easier. The location is unbeatable and Ma'am Maria is super kind and responsive. The Wi-Fi is always fast even during exam season!</p>
+      <div class="testi-author">
+        <div class="testi-avatar av1">😊</div>
+        <div>
+          <div class="stars">★★★★★</div>
+          <div class="testi-name">Camille Reyes</div>
+          <div class="testi-course">BS Nursing, 3rd Year</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card reveal">
+      <div class="testi-quote">"</div>
+      <p class="testi-text">I've been a tenant for 2 years and I wouldn't trade it. The room is clean, the community is friendly, and I've never felt unsafe. Highly recommended for incoming freshmen!</p>
+      <div class="testi-author">
+        <div class="testi-avatar av2">🧑</div>
+        <div>
+          <div class="stars">★★★★★</div>
+          <div class="testi-name">Jared Villanueva</div>
+          <div class="testi-course">BSIT, 4th Year</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card reveal">
+      <div class="testi-quote">"</div>
+      <p class="testi-text">The study lounge is my favorite spot. Quiet, well-lit, and there's always good company. N & S Apartment and Boarding House really feels like home away from home. Worth every peso!</p>
+      <div class="testi-author">
+        <div class="testi-avatar av3">👧</div>
+        <div>
+          <div class="stars">★★★★★</div>
+          <div class="testi-name">Ana Lim</div>
+          <div class="testi-course">BA Communication, 2nd Year</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="contact-text reveal">
+      <div class="section-label">Get in Touch</div>
+      <h2>Ready to Move In?</h2>
+      <p>Send us a message and we'll get back to you within 24 hours. We'd love to show you around — in person or via video call.</p>
+      <div class="contact-perks">
+        <div class="perk"><div class="perk-icon">💬</div> Fast response within 24 hours</div>
+        <div class="perk"><div class="perk-icon">📅</div> Free room viewing anytime</div>
+        <div class="perk"><div class="perk-icon">📝</div> Flexible move-in dates</div>
+        <div class="perk"><div class="perk-icon">🔐</div> Secure online inquiry</div>
+      </div>
+    </div>
+
+    <form class="contact-form reveal" id="inquiryForm"
+          action="https://formspree.io/f/xojnnwzo"
+          method="POST">
+      <div class="form-title">Send an Inquiry</div>
+
+      <!-- Formspree redirect after submit -->
+      <input type="hidden" name="_next" value="javascript:void(0)">
+      <input type="hidden" name="_subject" value="New Room Inquiry – GreenNest">
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" name="first_name" placeholder="Juan" required>
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" name="last_name" placeholder="Dela Cruz" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="juan@email.com" required>
+      </div>
+      <div class="form-group">
+        <label for="room">Room Interest</label>
+        <select id="room" name="room_interest">
+          <option>Standard Single Room – ₱3,500/mo</option>
+          <option>Deluxe Double Room – ₱5,200/mo</option>
+          <option>Premium Suite – ₱7,500/mo</option>
+          <option>Not sure yet</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Hi! I'd like to know more about room availability and move-in dates..." required></textarea>
+      </div>
+
+      <!-- Success message (hidden by default) -->
+      <div id="successMsg" style="display:none; background:#d8f3dc; color:#2d6a4f; padding:14px 18px; border-radius:12px; font-weight:600; margin-bottom:14px; text-align:center;">
+        ✅ Your inquiry was sent! We'll reply within 24 hours.
+      </div>
+      <!-- Error message (hidden by default) -->
+      <div id="errorMsg" style="display:none; background:#fde8e8; color:#c0392b; padding:14px 18px; border-radius:12px; font-weight:600; margin-bottom:14px; text-align:center;">
+        ❌ Something went wrong. Please try again or email us directly.
+      </div>
+
+      <button type="submit" class="form-submit" id="submitBtn">Send Inquiry →</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">N & S Apartment <span>and </span> Boarding House</div>
+  <div class="footer-links">
+    <a href="#rooms">Rooms</a>
+    <a href="#about">About</a>
+    <a href="#testimonials">Reviews</a>
+    <a href="#contact">Contact</a>
+    <a href="#">Privacy Policy</a>
+  </div>
+  <div class="footer-copy">© 2025 N & S Apartment and Boarding House. All rights reserved.</div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Scroll nav shadow
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  // Close menu on link click
+  document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => {
+    document.getElementById('navLinks').classList.remove('open');
+  }));
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+
+  // Formspree async submission
+  const form = document.getElementById('inquiryForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const successMsg = document.getElementById('successMsg');
+  const errorMsg = document.getElementById('errorMsg');
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    submitBtn.textContent = 'Sending…';
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = '0.75';
+    successMsg.style.display = 'none';
+    errorMsg.style.display = 'none';
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        successMsg.style.display = 'block';
+        form.reset();
+        submitBtn.textContent = '✓ Sent!';
+        submitBtn.style.background = '#52b788';
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = '1';
+        setTimeout(() => {
+          submitBtn.textContent = 'Send Inquiry →';
+          submitBtn.style.background = '';
+          successMsg.style.display = 'none';
+        }, 5000);
+      } else {
+        throw new Error('Server error');
+      }
+    } catch (err) {
+      errorMsg.style.display = 'block';
+      submitBtn.textContent = 'Try Again';
+      submitBtn.style.background = '#e76f51';
+      submitBtn.disabled = false;
+      submitBtn.style.opacity = '1';
+      setTimeout(() => {
+        submitBtn.textContent = 'Send Inquiry →';
+        submitBtn.style.background = '';
+        errorMsg.style.display = 'none';
+      }, 4000);
+    }
+  });
+</script>
+</body>
+</html>
