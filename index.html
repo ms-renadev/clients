@@ -311,10 +311,26 @@
     display: flex; align-items: center; gap: 20px;
   }
   .owner-avatar {
-    width: 64px; height: 64px; border-radius: 50%;
+    width: 64px; 
+    height: 64px; 
+    border-radius: 50%;
+    /* Keep the gradient as a subtle border or background while loading */
     background: linear-gradient(135deg, var(--green-light), var(--green-mid));
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.8rem; flex-shrink: 0;
+    overflow: hidden; /* This clips the image into the circle shape */
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    flex-shrink: 0;
+    border: 2px solid var(--white); /* Optional: adds a nice white ring around the photo */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Optional: makes it pop a bit */
+  }
+
+  .owner-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* CRITICAL: This prevents the face from looking "squashed" */
+      object-position: center; /* Keeps the face in the middle */
+      display: block;
   }
   .owner-name { font-weight: 700; font-size: 1.05rem; color: var(--gray-dark); }
   .owner-role { font-size: .8rem; color: var(--gray-mid); margin-bottom: 8px; }
@@ -641,7 +657,9 @@
       <p class="about-desc">N & S Apartment and Boarding House offers a peaceful, clean, and secure environment specifically designed for the student lifestyle. Located in the heart of the MSU campus, we provide the perfect balance of convenience and comfort.</p>
       <p class="about-desc">Our facility is situated at MSU Cadayonan, Marawi City, positioned just below the College of Law, College of Education, and College of Engineering. We are conveniently located right beside the MSU-Meranaw Cultural Heritage Center.</p>
       <div class="owner-card">
-        <div class="owner-avatar">👩</div>
+        <div class="owner-avatar"> 
+          <img src="./images/owner-picture.jpg" alt="Owner's profile picture">
+        </div>
         <div>
           <div class="owner-name">Maria Santos</div>
           <div class="owner-role">Property Owner & Manager</div>
