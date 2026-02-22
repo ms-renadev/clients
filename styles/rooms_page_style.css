@@ -317,7 +317,21 @@
     min-width: 200px;
   }
   .strip-method:hover { background: rgba(255,255,255,0.18); transform: translateY(-2px); }
-  .strip-method-icon { font-size: 1.4rem; }
+  .strip-method-icon {
+  border: 1px solid black;
+  width: 40px;
+  height: 40px;
+  display: flex;           /* Centers the image perfectly */
+  align-items: center;
+  justify-content: center;
+  background-color: #f4f4f4; 
+  border-radius: 8px;      /* Slightly rounded corners */
+  }
+
+  .strip-method-icon img {
+    width: 24px;             /* Adjust based on icon detail */
+    height: auto;            /* Maintains aspect ratio */
+  }
   .strip-method-label { font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .6px; opacity: .7; }
   .strip-method-value { font-size: .92rem; font-weight: 600; }
 

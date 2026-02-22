@@ -427,16 +427,25 @@
     border-color: var(--green-light);
     transform: translateY(-2px);
   }
-  .contact-method-icon {
-    width: 46px; height: 46px;
-    border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.4rem; flex-shrink: 0;
+  /* This ensures the icon stays inside the 46px box */
+  .contact-method-icon img {
+        /* Or roughly 50-60% of the container */
+      object-fit: contain;
+      width: 45px;
+      height: 40px;
+      display: flex;
+      border-radius: 8px; 
   }
-  .cm-gmail { background: #fce8e6; }
-  .cm-facebook { background: #e7f0ff; }
-  .cm-mobile { background: #e6f7ec; }
-
+  
+  .cm-gmail { 
+    height: auto;   
+  }
+  .cm-facebook { 
+    height: auto;   
+  }
+  .cm-mobile { 
+    height: auto;   
+  }
   .contact-method-info {}
   .contact-method-label {
     font-size: .75rem; font-weight: 700; text-transform: uppercase;
