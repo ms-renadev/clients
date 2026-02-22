@@ -362,10 +362,22 @@
   }
   .testi-author { display: flex; align-items: center; gap: 14px; }
   .testi-avatar {
-    width: 46px; height: 46px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.4rem; flex-shrink: 0;
+    width: 46px; 
+    height: 46px; 
+    border-radius: 50%;
+    flex-shrink: 0; /* Prevents the circle from squishing */
+    overflow: hidden; /* Clips the image into a circle */
+    border: 2px solid white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   }
+
+  .testi-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Ensures the face isn't stretched */
+      display: block;
+  }
+  
   .av1 { background: linear-gradient(135deg, #d8f3dc, #95d5b2); }
   .av2 { background: linear-gradient(135deg, #b7e4c7, #52b788); }
   .av3 { background: linear-gradient(135deg, #74c69d, #40916c); }
@@ -391,10 +403,20 @@
   .contact-text p { color: rgba(255,255,255,0.7); font-size: 1.05rem; line-height: 1.7; margin-top: 14px; }
 
   .contact-perks { margin-top: 32px; display: flex; flex-direction: column; gap: 14px; }
-  .perk { display: flex; align-items: center; gap: 12px; color: rgba(255,255,255,0.85); font-size: .95rem; }
-  .perk-icon {
-    width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 10px;
-    display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0;
+  .perk-icon img {
+    width: 30px;         /* Mas maliit nang konti sa 36px para may 'breathing room' */
+    height: 30px;
+    object-fit: contain; /* Para hindi ma-deform ang icon */
+    border-radius: 30px; 
+    background-color: var(--white);
+  }
+  .perk {
+    display: flex;
+    align-items: center; /* I-center ang text verticaly sa icon */
+    gap: 12px;           /* Distansya sa pagitan ng icon at text */
+    margin-bottom: 14px;
+    color: rgba(255,255,255,0.85);
+    font-size: 0.95rem;
   }
 
   /* ── CONTACT CARD (NEW) ── */
@@ -428,15 +450,24 @@
     transform: translateY(-2px);
   }
   /* This ensures the icon stays inside the 46px box */
-  .contact-method-icon img {
-        /* Or roughly 50-60% of the container */
-      object-fit: contain;
-      width: 45px;
-      height: 40px;
-      display: flex;
-      border-radius: 8px; 
+  .contact-method-icon {
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    flex-shrink: 0;
+    overflow: hidden;
+    background: white; /* Base color */
   }
-  
+
+  .contact-method-icon img {
+      width: 28px; /* Adjusted for a nice fit */
+      height: 28px;
+      object-fit: contain;
+  }
+    
   .cm-gmail { 
     height: auto;   
   }
